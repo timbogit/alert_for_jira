@@ -20,5 +20,12 @@ module AlertForJira
       raise 'AlertForJira.jira_password has not been configured' unless jira_password
       jira_password
     end
+
+    # Private: obtain the currently configured API token string for JIRA
+    def jira_site
+      jira_site = @pd_api_token || ENV['JIRA_SITE']
+      raise 'AlertForJira.jira_site has not been configured' unless jira_site
+      jira_site
+    end
   end
 end
