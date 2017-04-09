@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Tim Schmelmer"]
   spec.email         = ["tim.schmelmer@gmail.com"]
 
-  spec.summary       = %q{Small gem with a commandline to create PD alerts based on JIRA}
-  spec.description   = %q{This gem lets you create PD alerts to a given team's
-    on-call if a critical-level JIRA ticket is cut.}
+  spec.summary       = %q{Small gem with a commandline to create JIRAs alerts based on PagerDuty}
+  spec.description   = %q{This gem lets you reassign JIRA tickets to a given team's
+    on-call, based on an on-call schedule}
   spec.homepage      = "https://github.com/timbogit/alert_for_jira/"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -30,9 +30,12 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "pagerduty", "~> 2.1"
+  spec.add_runtime_dependency "rest-client"
+  spec.add_runtime_dependency "hashie"
   spec.add_dependency "jira-ruby", "~> 1.2"
+
   spec.add_development_dependency "bundler", "~> 1.14"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.2"
+  spec.add_development_dependency "dotenv"
 end
