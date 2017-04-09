@@ -40,8 +40,9 @@ module AlertForJira
       client.Issue.jql(query)
     end
 
-    def self.create_issue_for_user(user_email:, project_name:, issue:)
-      #TODO
+    def self.assign_issue_to_user(user_email:, issue:)
+      new_assignee = user_by_email(user_email)
+      issue.save('fields' => {'assignee' => new_assignee})
     end
 
     private
@@ -53,7 +54,7 @@ module AlertForJira
                              :"Authorization" => "Basic #{Base64.encode64("admin:" + AlertForJira.jira_password)}",
                              params: params })
       if response.code > 199 && response.code < 300
-        return Array(JSON.parse(response.body)).map{|elem| Hashie::Mash.new(elem)}
+        return Array(JSON.parse(response.body)).map{ |elem| Hashie::Mash.new(elem) }
       else
         return nil
       end

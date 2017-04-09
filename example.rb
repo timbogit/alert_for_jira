@@ -20,3 +20,6 @@ open_on_call_issues = AlertForJira::Jira.on_call_issues(project_name: "ACME")
 
 jira_timbo = AlertForJira::Jira.user(key: "tim_schmelmer")
 jira_timbo_rest = AlertForJira::Jira.user_by_email("tim_schmelmer@hotmail.com")
+
+issue = AlertForJira::Jira.assign_issue_to_user(user_email: jira_timbo_rest.emailAddress,
+      issue: all_on_call_issues.first)
