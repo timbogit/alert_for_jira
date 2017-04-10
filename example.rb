@@ -16,6 +16,11 @@ jira_timbo = AlertForJira::Jira.user(key: "tim_schmelmer")
 # Getting a user by email address -- not part of `jira-ruby`, needs using RestClient
 jira_timbo_rest = AlertForJira::Jira.user_by_email("tim_schmelmer@hotmail.com")
 
+### Getting on-call schedule for a team and the user information in VictorOps
+vo_schedule = AlertForJira::VictorOps.get_team_schedule(team: 'example')
+vo_user_handle = vo_schedule.schedule[0].onCall
+vo_user = AlertForJira::VictorOps.get_user(handle: vo_user_handle)
+
 ### Switching all open "On-Call" issues to be assigned to the oncall
 schedules = AlertForJira::PagerDuty.get_schedules()
 user_ids = schedules[0].users.map(&:id)
