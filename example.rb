@@ -4,7 +4,7 @@ Dotenv.load ".env"
 ### Getting all JIRA users to whom JIRA issues are assigned in a given project
 issues = AlertForJira::Jira.issues_in_project(name: "ACME")
 assignees = issues.map(&:assignee)
-jira_issues_emails = assignees.map(&:emailAddress)
+jira_issues_emails = assignees.compact.map(&:emailAddress)
 
 ### Getting all JIRA users whom are part of a given project
 project = AlertForJira::Jira.project(name: "ACME")
